@@ -4,6 +4,7 @@ import Login from '@/views/login'
 import Layout from '@/views/layout'
 import Welcome from '@/views/welcome'
 import auth from '@/utils/auth'
+import Article from '@/views/article'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,8 @@ const routes = [
     { path: '/login', component: Login },
     {
         path: '/', component: Layout, redirect: '/welcome', children: [
-            { path: 'welcome', component: Welcome }
+            { path: 'welcome', component: Welcome },
+            { path: 'article', component: Article }
         ]
     }
 ]

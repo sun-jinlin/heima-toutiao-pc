@@ -54,9 +54,8 @@ export default {
   },
   methods: {
     login() {
-      this.$refs.loginForm.validate(valit => {
-        if (valit) {
-          console.log(this.loginForm.mobile, this.loginForm.card);
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
           this.$http
             .post("/authorizations", this.loginForm)
             .then(res => {
