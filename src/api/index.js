@@ -1,10 +1,21 @@
 import router from '@/router'
 import axios from 'axios'
 import auth from '@/utils/auth.js'
+import JSONbig from 'json-bigint'
 
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0';
 
 // axios.defaults.headers.Authorization = `Bearer ${auth.getUser().token}`
+
+axios.defaults.transformResponse = [(data) => {
+
+    try {
+        return JSONbig.parse(data)
+    } catch (e) {
+        return (data)
+    }
+}]
+
 
 // 请求拦截器
 axios.interceptors.request.use((config) => {

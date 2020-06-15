@@ -5,6 +5,7 @@ import Layout from '@/views/layout'
 import Welcome from '@/views/welcome'
 import auth from '@/utils/auth'
 import Article from '@/views/article'
+import Image from '@/views/image'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,8 @@ const routes = [
     {
         path: '/', component: Layout, redirect: '/welcome', children: [
             { path: 'welcome', component: Welcome },
-            { path: 'article', component: Article }
+            { path: 'article', component: Article },
+            { path: 'image', component: Image }
         ]
     }
 ]
