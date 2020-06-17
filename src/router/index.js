@@ -6,6 +6,7 @@ import Welcome from '@/views/welcome'
 import auth from '@/utils/auth'
 import Article from '@/views/article'
 import Image from '@/views/image'
+import Publish from '@/views/publish'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,8 @@ const routes = [
         path: '/', component: Layout, redirect: '/welcome', children: [
             { path: 'welcome', component: Welcome },
             { path: 'article', component: Article },
-            { path: 'image', component: Image }
+            { path: 'image', component: Image },
+            { path: 'publish', component: Publish }
         ]
     }
 ]

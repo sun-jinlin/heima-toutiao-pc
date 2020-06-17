@@ -21,15 +21,9 @@
         </el-form-item>
         <!-- 下拉框 -->
         <el-form-item label="频道： ">
-          <el-select
-            clearable
-            @change="changeChannel"
-            v-model="resParams.channel_id"
-            placeholder="请选择"
-          >
-            <el-option v-for="item in channels" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+          <my-channel v-model="resParams.channel_id"></my-channel>
         </el-form-item>
+
         <!-- 日期框 -->
         <el-form-item label="日期：">
           <el-date-picker
@@ -121,12 +115,11 @@ export default {
         per_page: 20
       },
       articles: [],
-      channels: [],
+
       total: 0
     };
   },
   created() {
-    this.getChannelsOption();
     this.getArticles();
   },
   methods: {
@@ -151,11 +144,7 @@ export default {
     toEdit(id) {
       this.$router.push({ path: "/publish", query: { id } });
     },
-    changeChannel() {
-      if (this.resParams.channel_id === "") {
-        this.resParams.channel_id = null;
-      }
-    },
+
     changeDate(dateArr) {
       if (dateArr) {
         this.resParams.begin_pubdate = dateArr[0];
@@ -169,13 +158,7 @@ export default {
       this.resParams.page = 1;
       this.getArticles();
     },
-    async getChannelsOption() {
-      const {
-        data: { data }
-      } = await this.$http.get("/channels");
-      // console.log(data);
-      this.channels = data.channels;
-    },
+
     async getArticles() {
       const {
         data: { data }
