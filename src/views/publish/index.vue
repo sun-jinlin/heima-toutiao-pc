@@ -29,7 +29,7 @@
           <my-channel v-model=" articleForm.channel_id"></my-channel>
         </el-form-item>
         <el-form-item v-if="$route.query.id">
-          <el-button type="success" @click="addArticle(false)">修改文章</el-button>
+          <el-button type="success" @click="updateArticle">修改文章</el-button>
         </el-form-item>
         <el-form-item v-else>
           <el-button type="primary" @click="addArticle(false)">发布文章</el-button>
@@ -112,7 +112,9 @@ export default {
   watch: {
     "articleForm.cover": {
       handler() {
-        this.$refs.articleForm.validateField("cover");
+        this.$nextTick(() => {
+          this.$refs.articleForm.validateField("cover");
+        });
       },
       deep: true
     },
@@ -130,6 +132,9 @@ export default {
           },
           channel_id: null
         };
+        setTimeout(() => {
+          this.$refs.articleForm.clearValidate(["cover", "channel_id"]);
+        }, 0);
       }
     }
   },
@@ -139,6 +144,24 @@ export default {
     }
   },
   methods: {
+    updateArticle() {
+      this.$refs.articleForm.validate(async valid => {
+        if (valid) {
+          try {
+            await this.$http({
+              method: "put",
+              url: `/articles/${this.$route.query.id}`,
+              params: { draft: false },
+              data: this.articleForm
+            });
+            this.$message.success("修改文章成功");
+            this.$router.push("/article");
+          } catch (e) {
+            this.$message.error("修改文章失败");
+          }
+        }
+      });
+    },
     async getArticle() {
       const {
         data: { data }
