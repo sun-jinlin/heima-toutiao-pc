@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/login'
-import Layout from '@/views/layout'
-import Welcome from '@/views/welcome'
 import auth from '@/utils/auth'
-import Article from '@/views/article'
-import Image from '@/views/image'
-import Publish from '@/views/publish'
-import Comment from '@/views/comment'
-import Fans from '@/views/fans'
+
+
+const Login = () => import('@/views/login')
+const Layout = () => import('@/views/layout')
+const Welcome = () => import('@/views/welcome')
+const Article = () => import('@/views/article')
+const Image = () => import('@/views/image')
+const Publish = () => import('@/views/publish')
+const Comment = () => import('@/views/comment')
+const Fans = () => import('@/views/fans')
+const Setting = () => import('@/views/setting')
+const NotFound = () => import('@/views/404')
 
 Vue.use(VueRouter)
 
@@ -23,8 +27,10 @@ const routes = [
             { path: 'publish', component: Publish },
             { path: 'comment', component: Comment },
             { path: 'fans', component: Fans },
+            { path: 'setting', component: Setting },
         ]
-    }
+    },
+    { path: '*', component: NotFound }
 ]
 
 

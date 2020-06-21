@@ -118,7 +118,7 @@ export default {
       const {
         data: { data }
       } = await this.$http.get("/followers", { params: this.resParams });
-      console.log(data);
+      // console.log(data);
       this.fansList = data.results;
       this.total = data.total_count;
     }
